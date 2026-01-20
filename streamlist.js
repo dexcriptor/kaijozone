@@ -3,14 +3,14 @@ const channels = {
 KAPAMILYA: {
       name: 'Kapamilya Channel HD',
       url: 'http://136.158.97.2:6610/001/2/ch00000090990000001286/manifest.mpd?AuthInfo=Tajaqa%2FdPohvabxHbYUVrZLZDsxmxbufdpmz6ykZVY6w65FFCygtQMRRIUPF0xuXe9OnZTxGvJPcGpQT0Y5Pwg%3D%3D&version=v1.0&BreakPoint=0&virtualDomain=001.live_hls.zte.com&programid=ch00000000000000001694&contentid=ch00000000000000001694&videoid=ch00000090990000001286&recommendtype=0&userid=1878702116443&boid=001&stbid=02:00:00:00:00:00&terminalflag=1&profilecode=&usersessionid=1013243321&NeedJITP=1&JITPMediaType=DASH&JITPDRMType=NO',
-		  type: 'mpd'
+	  type: 'mpd'
     },
 
 
 GMA: {
       name: 'GMA 7',
       url: 'https://gsattv.akamaized.net/live/media0/gma7/Widevine/gma7.mpd',
-		  type: 'mpd'
+	  type: 'mpd'
     },
     
 TV5: {
@@ -18,7 +18,7 @@ TV5: {
       url: 'https://qp-pldt-live-bpk-02-prod.akamaized.net/bpk-tv/tv5_hd/default1/index.mpd',
       keyId: '2615129ef2c846a9bbd43a641c7303ef',
       key: '07c7f996b1734ea288641a68e1cfdc4d',
-     	type: 'mpd'
+      type: 'mpd'
     },
     
 A2Z: {
