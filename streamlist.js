@@ -61,7 +61,7 @@ CINEMO: {
 
 MYX: {
       name: 'MYX',
-      url: 'https://cdn-ue1-prod.tsv2.amagi.tv/linear/amg01006-abs-cbn-myxnola-dash-abscbnono/2258c2d0-ebf9-4e70-a609-d502351943aa/index.mpd',
+      url: 'https://cdn-ue1-prod.tsv2.amagi.tv/linear/amg01006-abs-cbn-myxnola-dash-abscbnono/7669ecd8-829f-4c70-a979-f227f6c7fc63/index.mpd',
       type: 'mpd'
     },
 
