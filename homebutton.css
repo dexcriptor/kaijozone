@@ -1,0 +1,26 @@
+        .button-container {
+            text-align: center;
+            /* Added some padding so the button isn't at the very top */
+            padding: 2rem; 
+        }
+
+        /* This is the style for your button */
+        .home-button {
+            display: inline-block; /* Ensures the button does not take the full line width */
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            background-color: red;
+            border-radius: 9999px; /* This makes it a "pill" or "circle" shape depending on padding */
+            text-decoration: none;
+            text-align: center;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            /* Adding a transition for a nice hover effect */
+            transition: background-color 0.3s ease;
+        }
+
+        .home-button:hover {
+            background-color: #c00; /* A slightly darker red on hover */
+        }
