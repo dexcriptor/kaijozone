@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online TV ni Kaijo</title>
+    <!-- Kept for verification/analytics -->
+    <script async src="f0a6f.txt" crossorigin="anonymous"></script>
+    <script src="https://cdn.tailwindcss.com/"></script>
+    
+    <link href="all.min.css" rel="stylesheet">
+    <link href="homebutton.css" rel="stylesheet">
+    
+    <!-- Custom scrollbar for webkit to match dark theme -->
+    <style>
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f0f0f; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555; 
+        }
+    </style>
+</head>
+<body class="bg-[#141414] text-gray-100 font-sans antialiased min-h-screen flex flex-col selection:bg-red-900 selection:text-white">
+
+    <!-- Navbar / Header -->
+    <nav class="bg-[#0a0a0a] border-b border-gray-800 sticky top-0 z-50 backdrop-blur-sm bg-opacity-90">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+           <div class="flex items-center gap-3">
+              <div class="w-8 h-8 bg-red-600 rounded flex items-center justify-center shadow-lg shadow-red-900/50">
+                <i class="fas fa-play text-white text-xs"></i>
+              </div>
+              <h1 class="text-lg md:text-xl font-bold tracking-tight text-white">Online TV <span class="text-gray-500 font-normal">ni Kaijo</span></h1>
+           </div>
+           <div class="flex items-center gap-2 px-3 py-1 bg-gray-900 rounded-full border border-gray-800">
+              <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse shadow-[0_0_8px_rgba(34,197,94,0.6)]"></div> 
+              <span class="text-xs font-bold text-gray-300 tracking-wider">LIVE</span>
+           </div>
+        </div>
+    </nav>
+
+    <!-- Main Interface -->
+    <main class="flex-grow flex flex-col items-center justify-start pt-4 md:pt-8 px-4 pb-8">
+        
+        <div class="w-full max-w-6xl space-y-6">
+            
+            <!-- Video Player Container (Theater Mode) -->
+            <div class="relative w-full bg-black rounded-xl overflow-hidden shadow-2xl shadow-black border border-gray-800 aspect-video z-10">
+                <!-- Player Placeholder / Injection Point -->
+                <div id="player" class="w-full h-full"></div>
+            </div>
+
+            <!-- Control Deck & Channel Selector -->
+            <div class="bg-[#1a1a1a] p-4 md:p-6 rounded-xl border border-gray-800 shadow-lg flex flex-col md:flex-row gap-4 items-center justify-between transition-all duration-300 hover:border-gray-700">
+                
+                <!-- Info Section -->
+                <div class="flex items-center gap-4 w-full md:w-auto border-b md:border-b-0 border-gray-800 pb-4 md:pb-0">
+                   <div class="p-3 bg-gray-800/50 rounded-lg hidden md:block">
+                      <i class="fas fa-satellite-dish text-red-500 text-xl"></i>
+                   </div>
+                   <div class="flex-1">
+                      <h2 class="text-sm uppercase tracking-wider text-gray-400 font-semibold mb-1">Now Watching</h2>
+                      <div class="flex items-center gap-2">
+                          <i class="fas fa-tv text-gray-500 text-sm md:hidden"></i>
+                          <p class="text-white font-medium">Select a channel to start streaming</p>
+                      </div>
+                   </div>
+                </div>
+
+                <!-- Controls Wrapper (Button + Selector) -->
+                <div class="flex flex-col md:flex-row gap-3 w-full md:w-auto items-center">
+                    
+                    <!-- Full Screen Button (ID used for toggling visibility on iOS) -->
+                    <button id="fullscreenBtn" onclick="toggleFullScreen()" class="w-full md:w-auto px-6 py-3 bg-gray-800 hover:bg-red-600 text-white rounded-lg border border-gray-700 hover:border-red-500 transition-all duration-300 flex items-center justify-center gap-2 group shadow-lg cursor-pointer">
+                        <i class="fas fa-expand group-hover:scale-110 transition-transform"></i>
+                        <span class="font-medium text-sm">Full Screen</span>
+                    </button>
+
+                    <!-- Styled Selector -->
+                    <div class="relative w-full md:w-[280px] lg:w-[320px] group">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <i class="fas fa-list-ul text-gray-500 group-hover:text-red-500 transition-colors"></i>
+                        </div>
+                        <select id="channelSelect" class="w-full appearance-none bg-[#0f0f0f] text-gray-200 border border-gray-700 hover:border-gray-500 hover:bg-black px-10 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent transition-all cursor-pointer text-sm font-medium shadow-inner">
+                            <option value="" class="text-gray-500">Click here to select channel...</option>
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-500 group-hover:text-gray-300">
+                            <i class="fas fa-chevron-down text-xs"></i>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            
+            <!-- Footer Credit / Version -->
+            <div class="text-center pt-8 border-t border-gray-900">
+                <p class="text-gray-600 text-xs flex items-center justify-center gap-2">
+                    <i class="fas fa-shield-alt"></i> Secure Stream &copy; 2026 <a href="https://kaijo.top">Kaijozone</a>
+                </p>
+            </div>
+
+        </div>
+        
+    </main>
+
+    <script>
+        const _0x1 = [
+            'jwpsrv.js', 'jwplayer.js', 'aHR0cHM6Ly9kZXhmbGl4LnBhZ2VzLmRldi9jaGFubmVscy5qcw=='
+        ];
+        
+        const _0x2 = 'WFN1UDRxTWwrOXRLMTdRTmIrNCt0aDJQbTlBV2dNTy9jWUg4Q0kwSEdHcjdiZGpv';
+
+        function loadScript(src) {
+            return new Promise((resolve, reject) => {
+                const script = document.createElement('script');
+                script.src = src;
+                script.onload = resolve;
+                script.onerror = reject;
+                document.head.appendChild(script);
+            });
+        }
+
+        async function initApp() {
+            try {
+                await loadScript(_0x1[0]);
+                await loadScript(_0x1[1]);
+                await loadScript(atob(_0x1[2]));
+                jwplayer[atob('a2V5')] = atob(_0x2);
+                
+                // Function to detect iOS devices
+                function isIOS() {
+                    return [
+                        'iPad Simulator', 'iPhone Simulator', 'iPod Simulator', 'iPad', 'iPhone', 'iPod'
+                    ].includes(navigator.platform)
+                    || (navigator.userAgent.includes("Mac") && "ontouchend" in document);
+                }
+
+                // Setup Fullscreen Toggle
+                window.toggleFullScreen = function() {
+                    const player = jwplayer("player");
+                    if (player && typeof player.setFullscreen === 'function') {
+                        player.setFullscreen(true);
+                    } else {
+                        const elem = document.getElementById("player");
+                        if (elem.requestFullscreen) elem.requestFullscreen();
+                        else if (elem.webkitRequestFullscreen) elem.webkitRequestFullscreen();
+                        else if (elem.msRequestFullscreen) elem.msRequestFullscreen();
+                    }
+                };
+
+                // Load Stream Logic
+                window.loadStream = function(channelKey) {
+                    if (typeof channels === 'undefined') return;
+                    const channel = channels[channelKey];
+                    if (!channel) return;
+
+                    let fileUrl = channel.url;
+                    let fileType = channel.type;
+                    let drmConfig = undefined;
+
+                    if (isIOS()) {
+                        if (channel.iosUrl) {
+                            fileUrl = channel.iosUrl;
+                            fileType = 'hls';
+                        } else if (channel.type === 'mpd') {
+                            alert("Channel Unavailable on iOS: This channel uses technology (MPEG-DASH) not supported by Apple devices.");
+                            return; 
+                        }
+                    }
+
+                    if (fileType === 'mpd' && channel.keyId && channel.key) {
+                        drmConfig = {
+                            clearkey: {
+                                keyId: channel.keyId,
+                                key: channel.key
+                            }
+                        };
+                    }
+
+                    jwplayer("player").setup({
+                        file: fileUrl,
+                        type: fileType,
+                        drm: drmConfig,
+                        width: "100%",
+                        aspectratio: "16:9",
+                        autostart: true,
+                        androidhls: true,
+                        primary: 'html5' 
+                    });
+                };
+
+                // Populate UI
+                const select = document.getElementById('channelSelect');
+                if (typeof channels !== 'undefined') {
+                    Object.keys(channels).forEach(key => {
+                        const option = document.createElement('option');
+                        option.value = key;
+                        option.textContent = channels[key].name;
+                        select.appendChild(option);
+                    });
+                }
+
+                select.addEventListener('change', function() {
+                    loadStream(this.value);
+                });
+
+                // Hide Full Screen on iOS
+                if (isIOS()) {
+                    const fsBtn = document.getElementById('fullscreenBtn');
+                    if (fsBtn) fsBtn.style.display = 'none';
+                }
+
+            } catch (error) {
+                console.error("Error loading resources:", error);
+            }
+        }
+
+        // Start initialization
+        initApp();
+    </script>
+
+</body>
+</html>
